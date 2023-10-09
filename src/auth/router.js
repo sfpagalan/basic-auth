@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { User } = require('./models');
+const UserModel = require('./models/users-model');
 const bcrypt = require('bcrypt');
 const { handleSignIn, handleSignUp } = require('../controllers/auth-controller');
 
@@ -8,7 +8,7 @@ const { handleSignIn, handleSignUp } = require('../controllers/auth-controller')
 router.post('/signup', async (req, res, next) => {
   try {
     req.body.password = await bcrypt.hash(req.body.password, 10);
-    const record = await User.create(req.body); // Create a new user using Sequelize
+    const record = await UserModel.create(req.body); // Create a new user using Sequelize
     res.status(201).json(record);
   } catch (error) {
     res.status(403).send('Error Creating User');

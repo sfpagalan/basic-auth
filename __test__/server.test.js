@@ -8,6 +8,7 @@ describe('Authentication Server', () => {
     await sequelize.sync();
   });
 
+  // Test user signup functionality
   it('should create a new user on POST /signup', async () => {
     const newUser = {
       username: 'roronoazoro',
@@ -23,6 +24,7 @@ describe('Authentication Server', () => {
     expect(response.body.user.username).toBe(newUser.username);
   });
 
+  // Test user signin functionality
   it('should sign in a user on POST /signin', async () => {
     const userCredentials = {
       username: 'roronoazoro',
@@ -38,6 +40,7 @@ describe('Authentication Server', () => {
     expect(response.body.user.username).toBe(userCredentials.username);
   });
 
+  // Test invalid login credentials
   it('should return 403 for invalid login on POST /signin', async () => {
     const invalidCredentials = {
       username: 'roronoazoro',
